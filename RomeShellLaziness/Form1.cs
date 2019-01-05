@@ -36,11 +36,8 @@ namespace RomeShellLaziness
             }
         }
         #endregion
-
         public InputSimulator sim = new InputSimulator();
         
-       
-
         public Form1()
         {
             InitializeComponent();
@@ -50,10 +47,7 @@ namespace RomeShellLaziness
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
-           
             string command = "give_trait";
-
             string Name = cmbName.Text + " ";
             string SurName = cmbSurName.Text;
             string traitWhole = cmbTrait.Text;
@@ -76,14 +70,166 @@ namespace RomeShellLaziness
             
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            string command = "give_trait";
+
+            string Name = cmbName.Text;
+            string SurName = " " + cmbSurName.Text;
+            string[] GoodTraits = {"GoodCommander 5", "NaturalMilitarySkill 4", "RhetoricSkill 3"
+                                 , "NaturalPhilosophy 3","PlainRomanVirtue 3","PoliticsSkill 3","PhlegmHumour 3"
+                                 , "RacesHaterRomanVice 3", "Intelligent 3", "HighPersonalSecurity 3", "GoodSiegeAttacker 5"
+                                 , "GoodSiegeDefender 5", "Austere 3", "CounterSpy 4", "WellConnectedWife 3", "GoodAdministrator 5", "Handsome 3"
+                                 , "AssassinMaster 4", "SpyMaster 5", "HaleAndHearty 3"};
+            for (int i = 0; i < GoodTraits.Length; i++)
+            {
+                geefTrait(command, Name, SurName, GoodTraits[i]);
+            }
+
+            
+
+        }
+
+        void geefTrait(string command, string Name, string SurName, string traitWhole)
+        {
+            if (SurName == " ")
+            {
+                SurName = "";
+            }
+
+            string TotalName = "";
+            try
+            {
+                 TotalName = "\"" + string.Concat(Name, SurName) + "\"";
+            }
+            catch (Exception)
+            {
+
+                 TotalName = "\"" + Name + "\"";
+            }
+
+
+            string[] traitsplit = traitWhole.Split(' ');
+
+            string traitName = "\"" + traitsplit[0] + "\"";
+            string traitLevel = traitsplit[1];
+
+
+            RomeTWWindowSwitch();
+
+
+
+            sim.Keyboard.TextEntry(command + " " + TotalName + " " + traitName + " " + traitLevel);
+
+            sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string command = "give_trait";
+
+            string Name = cmbName.Text;
+            string SurName =" " + cmbSurName.Text;
+            string[] BadTraits = { "BadAdministrator 4", "BadAttacker 5", "BadBuilder 3", "Cuckold 4", "LostEagle 2"
+                                 , "Drink 6", "ExpensiveTastes 3", "Hypochondriac 3", "Inbred 6", "IanR 4"
+                                 , "Perverted 6", "PublicAtheism 6", "Xenophilia 4" };
+            for (int i = 0; i < BadTraits.Length; i++)
+            {
+                geefTrait(command, Name, SurName, BadTraits[i]);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string command = "give_trait";
+
+            string Name = cmbName.Text + " ";
+            string SurName = cmbSurName.Text;
+            string[] BadTraits = {"GoodAssassin 5", "GoodSpy 5" };
+            for (int i = 0; i < BadTraits.Length; i++)
+            {
+                geefTrait(command, Name, SurName, BadTraits[i]);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            RomeTWWindowSwitch();
+            for (int i = 0; i < 500; i++)
+            {
+                sim.Keyboard.TextEntry("add_money 40000");
+
+                sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                Thread.Sleep(2);
+            }
+
+        }
+        void geefUnit(string cityNaam, string unit)
+        {
+            string unitF = "\"" + unit + "\"";
+            string cityF = "\"" + cityNaam + "\"";
+            sim.Keyboard.TextEntry("create_unit " + cityF + " " + unitF + " 1 8 8 8");
+            sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+        }
+        void geefUnit(string FirstName, string LastName, string unit)
+        {
+            if (LastName == " ")
+            {
+                LastName = "";
+            }
+
+            string TotalName = "";
+            try
+            {
+                TotalName = "\"" + string.Concat(FirstName, LastName) + "\"";
+            }
+            catch (Exception)
+            {
+
+                TotalName = "\"" + FirstName + "\"";
+            }
+            string unitF = "\"" + unit + "\"";
+            sim.Keyboard.TextEntry("create_unit " + TotalName + " " + unitF + " 1 8 8 8");
+            sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+        }
+
+        private void btnCreateUnits_Click_1(object sender, EventArgs e)
+        {
+            RomeTWWindowSwitch();
+            string cityName, Fname, Lname, unit;
+            int amount = int.Parse(txtAmount.Text);
+
+            Fname = cmbFirstName.Text + " ";
+            Lname = cmbLname.Text;
+
+            if (Lname == "")
+            {
+                Fname = cmbFirstName.Text;
+            }
+
+            cityName = cmbCity.Text;
+            unit = cmbUnit.Text;
+
+            if (cityName != "")
+            {
+                for (int i = 0; i < amount; i++)
+                {
+                    geefUnit(cityName, unit);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < amount; i++)
+                {
+                    geefUnit(Fname, Lname, unit);
+                }
+            }
         }
     }
 }
