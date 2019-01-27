@@ -43,6 +43,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button5 = new System.Windows.Forms.Button();
+            this.CreateLoadTemplate = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbLname = new System.Windows.Forms.ComboBox();
@@ -55,13 +56,27 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtAmount = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.TemplateClear = new System.Windows.Forms.Button();
+            this.lblLog = new System.Windows.Forms.Label();
+            this.TempSaveTemplate = new System.Windows.Forms.Button();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.TempLoadTemplate = new System.Windows.Forms.Button();
+            this.TempTemplateSelect = new System.Windows.Forms.ComboBox();
+            this.TempInsertUnit = new System.Windows.Forms.Button();
+            this.TempUnitSelect = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.TempUnitAmount = new System.Windows.Forms.TextBox();
+            this.TempUnitRawInput = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnTraitgiver
@@ -6669,7 +6684,7 @@
             this.button1.Location = new System.Drawing.Point(0, 58);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(159, 23);
-            this.button1.TabIndex = 10;
+            this.button1.TabIndex = 5;
             this.button1.Text = "SUPER GENERAL";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
@@ -6679,7 +6694,7 @@
             this.button2.Location = new System.Drawing.Point(165, 58);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(159, 23);
-            this.button2.TabIndex = 11;
+            this.button2.TabIndex = 6;
             this.button2.Text = "WORST GENERAL";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -6689,7 +6704,7 @@
             this.button3.Location = new System.Drawing.Point(330, 58);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(159, 23);
-            this.button3.TabIndex = 12;
+            this.button3.TabIndex = 7;
             this.button3.Text = "SUPER AGENT";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -6709,10 +6724,11 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(-3, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(580, 128);
+            this.tabControl1.Size = new System.Drawing.Size(580, 400);
             this.tabControl1.TabIndex = 15;
             this.tabControl1.Tag = "";
             // 
@@ -6732,7 +6748,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(572, 102);
+            this.tabPage1.Size = new System.Drawing.Size(572, 374);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Give Trait";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -6740,6 +6756,7 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.button5);
+            this.tabPage2.Controls.Add(this.CreateLoadTemplate);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.cmbLname);
@@ -6754,19 +6771,28 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(572, 102);
+            this.tabPage2.Size = new System.Drawing.Size(572, 365);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Create Unit";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(261, 68);
+            this.button5.Location = new System.Drawing.Point(409, 69);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(150, 23);
-            this.button5.TabIndex = 28;
-            this.button5.Text = "Preset DeathSquad";
+            this.button5.Size = new System.Drawing.Size(160, 23);
+            this.button5.TabIndex = 29;
+            this.button5.Text = "Use Selected Template";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // CreateLoadTemplate
+            // 
+            this.CreateLoadTemplate.FormattingEnabled = true;
+            this.CreateLoadTemplate.Location = new System.Drawing.Point(281, 71);
+            this.CreateLoadTemplate.Name = "CreateLoadTemplate";
+            this.CreateLoadTemplate.Size = new System.Drawing.Size(121, 21);
+            this.CreateLoadTemplate.TabIndex = 28;
             // 
             // label5
             // 
@@ -13720,10 +13746,19 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(572, 102);
+            this.tabPage3.Size = new System.Drawing.Size(572, 365);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Population";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(66, 61);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(239, 13);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Deze tab doet nog niks, maar misschien later nog";
             // 
             // textBox1
             // 
@@ -13740,20 +13775,411 @@
             this.comboBox2.Size = new System.Drawing.Size(121, 21);
             this.comboBox2.TabIndex = 0;
             // 
-            // label9
+            // tabPage4
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(66, 61);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(239, 13);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Deze tab doet nog niks, maar misschien later nog";
+            this.tabPage4.Controls.Add(this.TemplateClear);
+            this.tabPage4.Controls.Add(this.lblLog);
+            this.tabPage4.Controls.Add(this.TempSaveTemplate);
+            this.tabPage4.Controls.Add(this.lblInfo);
+            this.tabPage4.Controls.Add(this.TempLoadTemplate);
+            this.tabPage4.Controls.Add(this.TempTemplateSelect);
+            this.tabPage4.Controls.Add(this.TempInsertUnit);
+            this.tabPage4.Controls.Add(this.TempUnitSelect);
+            this.tabPage4.Controls.Add(this.label10);
+            this.tabPage4.Controls.Add(this.label11);
+            this.tabPage4.Controls.Add(this.TempUnitAmount);
+            this.tabPage4.Controls.Add(this.TempUnitRawInput);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(572, 374);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Templates";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // TemplateClear
+            // 
+            this.TemplateClear.Location = new System.Drawing.Point(439, 256);
+            this.TemplateClear.Name = "TemplateClear";
+            this.TemplateClear.Size = new System.Drawing.Size(101, 23);
+            this.TemplateClear.TabIndex = 32;
+            this.TemplateClear.Text = "Clear Input";
+            this.TemplateClear.UseVisualStyleBackColor = true;
+            this.TemplateClear.Click += new System.EventHandler(this.TemplateClear_Click);
+            // 
+            // lblLog
+            // 
+            this.lblLog.AutoSize = true;
+            this.lblLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLog.Location = new System.Drawing.Point(6, 87);
+            this.lblLog.Name = "lblLog";
+            this.lblLog.Size = new System.Drawing.Size(0, 16);
+            this.lblLog.TabIndex = 31;
+            // 
+            // TempSaveTemplate
+            // 
+            this.TempSaveTemplate.Location = new System.Drawing.Point(439, 196);
+            this.TempSaveTemplate.Name = "TempSaveTemplate";
+            this.TempSaveTemplate.Size = new System.Drawing.Size(101, 23);
+            this.TempSaveTemplate.TabIndex = 30;
+            this.TempSaveTemplate.Text = "Save template";
+            this.TempSaveTemplate.UseVisualStyleBackColor = true;
+            this.TempSaveTemplate.Click += new System.EventHandler(this.TempSaveTemplate_Click);
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.Location = new System.Drawing.Point(440, 51);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(100, 56);
+            this.lblInfo.TabIndex = 29;
+            this.lblInfo.Text = "Either give a new name and save the template, or load an existing one:";
+            // 
+            // TempLoadTemplate
+            // 
+            this.TempLoadTemplate.Location = new System.Drawing.Point(439, 137);
+            this.TempLoadTemplate.Name = "TempLoadTemplate";
+            this.TempLoadTemplate.Size = new System.Drawing.Size(101, 23);
+            this.TempLoadTemplate.TabIndex = 28;
+            this.TempLoadTemplate.Text = "Load template";
+            this.TempLoadTemplate.UseVisualStyleBackColor = true;
+            this.TempLoadTemplate.Click += new System.EventHandler(this.TempLoadTemplate_Click);
+            // 
+            // TempTemplateSelect
+            // 
+            this.TempTemplateSelect.FormattingEnabled = true;
+            this.TempTemplateSelect.Location = new System.Drawing.Point(439, 110);
+            this.TempTemplateSelect.Name = "TempTemplateSelect";
+            this.TempTemplateSelect.Size = new System.Drawing.Size(121, 21);
+            this.TempTemplateSelect.TabIndex = 27;
+            this.TempTemplateSelect.SelectedIndexChanged += new System.EventHandler(this.TempTemplateSelect_SelectedIndexChanged);
+            // 
+            // TempInsertUnit
+            // 
+            this.TempInsertUnit.Location = new System.Drawing.Point(319, 33);
+            this.TempInsertUnit.Name = "TempInsertUnit";
+            this.TempInsertUnit.Size = new System.Drawing.Size(115, 23);
+            this.TempInsertUnit.TabIndex = 26;
+            this.TempInsertUnit.Text = "Add to template";
+            this.TempInsertUnit.UseVisualStyleBackColor = true;
+            this.TempInsertUnit.Click += new System.EventHandler(this.TempInsertUnit_Click);
+            // 
+            // TempUnitSelect
+            // 
+            this.TempUnitSelect.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.TempUnitSelect.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.TempUnitSelect.FormattingEnabled = true;
+            this.TempUnitSelect.Items.AddRange(new object[] {
+            "barb peasant briton",
+            "barb peasant dacian",
+            "barb peasant gaul",
+            "barb peasant german",
+            "barb peasant scythian",
+            "barb peasant slave",
+            "barb peltast gaul",
+            "barb peltast german",
+            "barb slinger briton",
+            "barb archer dacian",
+            "barb archer scythian",
+            "barb archer slave",
+            "warband archer dacian",
+            "warband archer german",
+            "warband archer scythian",
+            "warband huntsman gaul",
+            "warband hurler briton",
+            "barb infantry briton",
+            "barb infantry dacian",
+            "barb infantry gaul",
+            "barb infantry slave",
+            "warband spear german",
+            "warband sword briton",
+            "warband sword gaul",
+            "warband axe german",
+            "warband axe scythian",
+            "warband falx dacian",
+            "warband falx thracian",
+            "warband dhaxe german",
+            "barb warguard briton",
+            "barb warguard dacian",
+            "barb warguard gaul",
+            "warband woad briton",
+            "barb naked fanatics dacian",
+            "barb naked fanatics gauls",
+            "barb naked fanatics german",
+            "barb naked fanatics slave",
+            "barb naked fanatics spain",
+            "barb druids briton",
+            "barb druids gaul",
+            "barb druids slave",
+            "barb night raiders german",
+            "barb berserker german",
+            "barb screeching women german",
+            "barb wardogs briton",
+            "barb wardogs dacian",
+            "barb wardogs gaul",
+            "barb wardogs german",
+            "barb wardogs scythian",
+            "barb cavalry dacian",
+            "barb cavalry gaul",
+            "barb cavalry german",
+            "barb cavalry scythian",
+            "barb cavalry slave",
+            "barb noble cavalry dacian",
+            "barb noble cavalry gaul",
+            "barb noble cavalry german",
+            "barb noble cavalry slave",
+            "barb gothic cavalry german",
+            "barb chariot light briton",
+            "barb chariot heavy briton",
+            "barb chariot heavy slave",
+            "barb horse archers scythian",
+            "barb horse archers slave",
+            "barb noble horse archers scythian",
+            "barb head hunting maidens scythian",
+            "barb scythian nobles scythian",
+            "barb scythian noblewomen scythian",
+            "barb ballista dacian",
+            "barb onager dacian",
+            "barb onager scythian",
+            "barb chieftain cavalry early dacian",
+            "barb chieftain cavalry early gaul",
+            "barb chieftain cavalry early german",
+            "barb chieftain cavalry early scythian",
+            "barb chieftain cavalry early slave",
+            "barb chieftain cavalry dacian",
+            "barb chieftain cavalry gaul",
+            "barb chieftain cavalry german",
+            "barb british general briton",
+            "barb scythian general scythian",
+            "carthaginian peasant",
+            "carthaginian peltast",
+            "carthaginian slinger",
+            "carthaginian archer",
+            "carthaginian city militia",
+            "carthaginian infantry",
+            "carthaginian medium infantry",
+            "carthaginian heavy infantry",
+            "carthaginian sacred band infantry",
+            "spanish scutarii",
+            "spanish bull warriors",
+            "numidian javelinmen",
+            "numidian desert warriors",
+            "numidian legionaries",
+            "carthaginian cavalry",
+            "carthaginian medium cavalry",
+            "carthaginian general\'s cavalry early",
+            "carthaginian general\'s cavalry",
+            "carthaginian royal cavalry",
+            "numidian cavalry",
+            "numidian camel riders",
+            "carthaginian warhounds",
+            "carthaginian elephant forest",
+            "carthaginian elephant african",
+            "carthaginian elephant african cataphract",
+            "carthaginian onager",
+            "carthaginian heavy onager",
+            "east peasant",
+            "east peltast",
+            "east slinger",
+            "east archer",
+            "east hillmen",
+            "east infantry",
+            "east heavy infantry",
+            "east hoplite",
+            "east hoplite brazen shield",
+            "east legionary",
+            "east cavalry",
+            "east heavy cavalry",
+            "east heavy cataphract",
+            "east cappodocian cavalry",
+            "east persian cavalry",
+            "east cataphract archer",
+            "east horse archer",
+            "east camel cataphract",
+            "east elephant",
+            "east scythed chariot",
+            "east chariot archer",
+            "east generals cavalry early",
+            "east generals cavalry",
+            "east pontic general",
+            "east onager",
+            "egyptian peasant",
+            "egyptian peltast",
+            "egyptian slingers",
+            "egyptian archer",
+            "egyptian archer elite",
+            "egyptian nubian spearmen",
+            "egyptian nile infantry",
+            "egyptian infantry",
+            "egyptian elite guards",
+            "egyptian cavalry",
+            "egyptian nubian cavalry",
+            "egyptian cleruch",
+            "egyptian bedouin",
+            "egyptian chariot",
+            "egyptian chariot archer",
+            "egyptian onager",
+            "egyptian heavy onager",
+            "egyptian general\'s bodyguard early",
+            "egyptian general\'s bodyguard",
+            "greek peasant",
+            "greek peltast",
+            "greek archer",
+            "greek heavy peltast",
+            "greek hoplite militia",
+            "greek hoplite",
+            "greek hoplite elite",
+            "greek hoplite spartan",
+            "greek levy pikemen",
+            "greek pikemen",
+            "greek royal pikemen",
+            "greek silver shield pikemen",
+            "greek argyraspid",
+            "greek bastarnae",
+            "greek light lancer",
+            "greek cavalry",
+            "greek medium cavalry",
+            "greek heavy cavalry",
+            "greek royal cavalry",
+            "greek general\'s guard cavalry early",
+            "greek general\'s guard cavalry",
+            "thracian bodyguard early",
+            "thracian bodyguard",
+            "greek elephant small",
+            "greek elephant african",
+            "greek elephant cataphract",
+            "greek incendiary pigs",
+            "greek ballista",
+            "greek onager",
+            "greek heavy onager",
+            "greek chariot scythed",
+            "roman peasant",
+            "roman archer",
+            "roman archer auxillia",
+            "roman velite",
+            "roman light infantry auxillia",
+            "roman city militia",
+            "roman hastati",
+            "roman princeps",
+            "roman triarii",
+            "roman infantry auxillia",
+            "roman legionary cohort i",
+            "roman legionary first cohort i",
+            "roman legionary cohort ii",
+            "roman legionary first cohort ii",
+            "roman praetorian cohort i",
+            "roman praetorian cohort urban i",
+            "roman arcani",
+            "roman wardogs",
+            "roman pigs",
+            "roman velite gladiator",
+            "roman samnite gladiator",
+            "roman mirmillo gladiator",
+            "roman light cavalry",
+            "roman cavalry auxillia",
+            "roman medium cavalry",
+            "roman heavy cavalry",
+            "roman praetorian cavalry",
+            "roman generals guard cavalry early",
+            "roman generals guard cavalry",
+            "roman ballista",
+            "roman scorpion",
+            "roman onager",
+            "roman heavy onager",
+            "roman repeating ballista",
+            "generic rebel general",
+            "eastern rebel general",
+            "barbarian rebel general",
+            "rebel amazon chariots",
+            "rebel judaean zealots",
+            "merc peltast",
+            "merc illyrian",
+            "merc samnite",
+            "merc cilician pirate",
+            "merc thracian",
+            "merc bastarnae",
+            "merc sarmatian cavalry",
+            "merc horse archers",
+            "merc spanish infantry",
+            "merc eastern infantry",
+            "merc rhodian slingers",
+            "merc cretan archers",
+            "merc greek hoplites",
+            "merc libyan infantry",
+            "merc numidian cavalry",
+            "merc arab cavalry",
+            "merc bedouin",
+            "merc bedouin archers",
+            "merc balearic slingers",
+            "merc barbarian infantry",
+            "merc barbarian cavalry",
+            "merc elephants",
+            "cheat oliphants",
+            "naval biremes",
+            "naval triremes",
+            "naval quinquiremes",
+            "naval corvus quinquireme",
+            "naval deceres",
+            "naval boats",
+            "naval large boats",
+            "naval pirate ships",
+            "barbarian civ peasant",
+            "barbarian female peasant",
+            "carthaginian civ peasant",
+            "carthaginian female peasant",
+            "eastern civ peasant",
+            "eastern female peasant",
+            "egyptian civ peasant",
+            "egyptian female peasant",
+            "greek civ peasant",
+            "greek female peasant",
+            "roman civ peasant",
+            "roman female peasant"});
+            this.TempUnitSelect.Location = new System.Drawing.Point(11, 36);
+            this.TempUnitSelect.Name = "TempUnitSelect";
+            this.TempUnitSelect.Size = new System.Drawing.Size(249, 21);
+            this.TempUnitSelect.TabIndex = 24;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(263, 22);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(43, 13);
+            this.label10.TabIndex = 24;
+            this.label10.Text = "Amount";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(8, 14);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(26, 13);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Unit";
+            // 
+            // TempUnitAmount
+            // 
+            this.TempUnitAmount.Location = new System.Drawing.Point(266, 36);
+            this.TempUnitAmount.Name = "TempUnitAmount";
+            this.TempUnitAmount.Size = new System.Drawing.Size(40, 20);
+            this.TempUnitAmount.TabIndex = 25;
+            // 
+            // TempUnitRawInput
+            // 
+            this.TempUnitRawInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TempUnitRawInput.Location = new System.Drawing.Point(6, 110);
+            this.TempUnitRawInput.Multiline = true;
+            this.TempUnitRawInput.Name = "TempUnitRawInput";
+            this.TempUnitRawInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TempUnitRawInput.Size = new System.Drawing.Size(419, 252);
+            this.TempUnitRawInput.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(573, 138);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(573, 408);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Rome Total War Shell Pusher";
@@ -13766,6 +14192,8 @@
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -13800,8 +14228,22 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Button TempSaveTemplate;
+        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Button TempLoadTemplate;
+        private System.Windows.Forms.ComboBox TempTemplateSelect;
+        private System.Windows.Forms.Button TempInsertUnit;
+        private System.Windows.Forms.ComboBox TempUnitSelect;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox TempUnitAmount;
+        private System.Windows.Forms.TextBox TempUnitRawInput;
+        private System.Windows.Forms.Label lblLog;
+        private System.Windows.Forms.ComboBox CreateLoadTemplate;
+        private System.Windows.Forms.Button TemplateClear;
+        private System.Windows.Forms.Button button5;
     }
 }
 

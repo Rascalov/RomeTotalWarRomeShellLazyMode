@@ -14,9 +14,7 @@ using System.Windows.Input;
 using SlimDX.DirectInput;
 using WindowsInput.Native;
 using WindowsInput;
-
-
-
+using System.IO;
 
 namespace RomeShellLaziness
 {
@@ -37,11 +35,12 @@ namespace RomeShellLaziness
         }
         #endregion
         public InputSimulator sim = new InputSimulator();
+        public StreamReader reader;
+        public StreamWriter writer;
         
         public Form1()
         {
             InitializeComponent();
-            
         }
 
 
@@ -73,7 +72,7 @@ namespace RomeShellLaziness
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            UpdateList();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -230,6 +229,147 @@ namespace RomeShellLaziness
                     geefUnit(Fname, Lname, unit);
                 }
             }
+        }
+
+        private void TempTemplateSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void TempLoadTemplate_Click(object sender, EventArgs e)
+        {
+            
+            try
+            {
+                TempUnitRawInput.Text = "";
+                string bestand = TempTemplateSelect.Text;
+                reader = new StreamReader(bestand);
+                while (!reader.EndOfStream)
+                {
+                    TempUnitRawInput.Text += reader.ReadLine() + "\n\r";
+                }
+                lblLog.ForeColor = Color.Green;
+                lblLog.Text = "Loaded " + bestand;
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                lblLog.ForeColor = Color.Red;
+                lblLog.Text = "Error, could not load selected file";
+                UpdateList();
+            }
+            
+        }
+
+        private void TempSaveTemplate_Click(object sender, EventArgs e)
+        {
+            string bestand = @"RomeUnitTemplates\" + TempTemplateSelect.Text + ".txt";
+            writer = new StreamWriter(bestand);
+            
+            foreach ( string line in TempUnitRawInput.Text.Split('\n'))
+            {
+                writer.WriteLine(line);
+            }
+            writer.Close();
+            UpdateList();
+            lblLog.ForeColor = Color.Green;
+            lblLog.Text = "Saved to " + bestand;
+        }
+
+        private void TempInsertUnit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string unit = TempUnitSelect.Text;
+                int amount = int.Parse(TempUnitAmount.Text);
+                for (int i = 0; i < amount; i++)
+                {
+                    TempUnitRawInput.Text += "create_unit " + "\"" + unit + "\"" + " 1 8 8 8" + "\r\n";
+                }
+            }
+            catch (Exception)
+            {
+                lblLog.ForeColor = Color.Red;
+                lblLog.Text = "Error, invalid input";
+            } 
+        }
+        void UpdateList()
+        {
+            CreateLoadTemplate.Items.Clear();
+            CreateLoadTemplate.Items.AddRange(Directory.GetFiles("RomeUnitTemplates"));
+            TempTemplateSelect.Items.Clear();
+            TempTemplateSelect.Items.AddRange(Directory.GetFiles("RomeUnitTemplates"));
+        }
+
+        private void TemplateClear_Click(object sender, EventArgs e)
+        {
+            TempUnitRawInput.Clear();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string cityName, FirstName, LastName, bestand;
+            bestand = CreateLoadTemplate.Text;
+            FirstName = cmbFirstName.Text + " ";
+            LastName = cmbLname.Text;
+            cityName = cmbCity.Text;
+
+            if (LastName == "")
+            {
+                FirstName = cmbFirstName.Text;
+            }
+
+            if (LastName == " ")
+            {
+                LastName = "";
+            }
+
+            string TotalName = "";
+            try
+            {
+                TotalName = "\"" + string.Concat(FirstName, LastName) + "\"";
+            }
+            catch (Exception)
+            {
+                TotalName = "\"" + FirstName + "\"";
+            }
+            RomeTWWindowSwitch();
+            reader = new StreamReader(bestand);
+
+            if (cityName != "")
+            {
+                while (!reader.EndOfStream)
+                {
+                    string temp = reader.ReadLine();
+                    try
+                    {
+                        string command = temp.Substring(0, 12) + "\"" + cityName + "\"" + temp.Substring(11);
+                        sim.Keyboard.TextEntry(command);
+                        sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            else
+            {
+                while (!reader.EndOfStream)
+                {
+                    try
+                    {
+                        string temp = reader.ReadLine();
+                        string command = temp.Substring(0, 12) + TotalName + temp.Substring(11);
+                        sim.Keyboard.TextEntry(command);
+                        sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                    }
+                    catch
+                    {
+                    } 
+                }
+            }
+            
+            reader.Close();
         }
     }
 }
