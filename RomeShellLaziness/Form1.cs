@@ -16,14 +16,16 @@ namespace RomeShellLaziness
         [DllImport("user32.dll")]
         public static extern void SwitchToThisWindow(IntPtr hWnd, bool turnon);
         static String ProcWindow = "RomeTW";
-        private static void RomeTWWindowSwitch()
+        private static bool RomeTWWindowSwitch()
         {
             Process[] procs = Process.GetProcessesByName(ProcWindow);
             foreach (Process proc in procs)
             {
                 //switch to process by name
                 SwitchToThisWindow(proc.MainWindowHandle, true);
+                return true;
             }
+            return false;
         }
         #endregion
         public InputSimulator sim = new InputSimulator();
@@ -52,13 +54,15 @@ namespace RomeShellLaziness
 
 
             //string fullCommand = command + " " + "\"" + TotalName + "\""  + " " + traitName + " " + traitLevel  ;
-            RomeTWWindowSwitch();
-
-            sim.Keyboard.TextEntry(command + " " + TotalName + " " + traitName + " " + traitLevel);
-            
-            sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
-                
-            
+            if (RomeTWWindowSwitch())
+            {
+                sim.Keyboard.TextEntry(command + " " + TotalName + " " + traitName + " " + traitLevel);
+                sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+            }
+            else
+            {
+                lblLog.Text = "Rome total war not detected";
+            }
         }
 
 
@@ -111,13 +115,17 @@ namespace RomeShellLaziness
             string traitLevel = traitsplit[1];
 
 
-            RomeTWWindowSwitch();
+            if (RomeTWWindowSwitch())
+            {
+                sim.Keyboard.KeyPress(VirtualKeyCode.OEM_3);
+                sim.Keyboard.TextEntry(command + " " + TotalName + " " + traitName + " " + traitLevel);
 
-
-            sim.Keyboard.KeyPress(VirtualKeyCode.OEM_3);
-            sim.Keyboard.TextEntry(command + " " + TotalName + " " + traitName + " " + traitLevel);
-
-            sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+            }
+            else 
+            {
+                MessageBox.Show("Rome total war not detected");
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -150,15 +158,20 @@ namespace RomeShellLaziness
 
         private void button4_Click(object sender, EventArgs e)
         {
-            RomeTWWindowSwitch();
-            for (int i = 0; i < 500; i++)
+            if (RomeTWWindowSwitch())
             {
-                sim.Keyboard.TextEntry("add_money 40000");
+                for (int i = 0; i < 500; i++)
+                {
+                    sim.Keyboard.TextEntry("add_money 40000");
 
-                sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
-                Thread.Sleep(2);
+                    sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                    Thread.Sleep(2);
+                }
             }
-
+            else
+            {
+                MessageBox.Show("Rome total war not detected");
+            }
         }
         void giveUnit(string cityNaam, string unit)
         {
@@ -191,34 +204,40 @@ namespace RomeShellLaziness
 
         private void btnCreateUnits_Click_1(object sender, EventArgs e)
         {
-            RomeTWWindowSwitch();
-            string cityName, Fname, Lname, unit;
-            int amount = int.Parse(txtAmount.Text);
-
-            Fname = cmbFirstName.Text + " ";
-            Lname = cmbLname.Text;
-
-            if (Lname == "")
+            if (RomeTWWindowSwitch())
             {
-                Fname = cmbFirstName.Text;
-            }
+                string cityName, Fname, Lname, unit;
+                int amount = int.Parse(txtAmount.Text);
 
-            cityName = cmbCity.Text;
-            unit = cmbUnit.Text;
+                Fname = cmbFirstName.Text + " ";
+                Lname = cmbLname.Text;
 
-            if (cityName != "")
-            {
-                for (int i = 0; i < amount; i++)
+                if (Lname == "")
                 {
-                    giveUnit(cityName, unit);
+                    Fname = cmbFirstName.Text;
+                }
+
+                cityName = cmbCity.Text;
+                unit = cmbUnit.Text;
+
+                if (cityName != "")
+                {
+                    for (int i = 0; i < amount; i++)
+                    {
+                        giveUnit(cityName, unit);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < amount; i++)
+                    {
+                        giveUnit(Fname, Lname, unit);
+                    }
                 }
             }
-            else
+            else 
             {
-                for (int i = 0; i < amount; i++)
-                {
-                    giveUnit(Fname, Lname, unit);
-                }
+                MessageBox.Show("Rome total war not detected");
             }
         }
 
@@ -336,43 +355,49 @@ namespace RomeShellLaziness
             {
                 TotalName = "\"" + FirstName + "\"";
             }
-            RomeTWWindowSwitch();
-            reader = new StreamReader(file);
-
-            if (cityName != "")
+            if (RomeTWWindowSwitch())
             {
-                while (!reader.EndOfStream)
+                reader = new StreamReader(file);
+
+                if (cityName != "")
                 {
-                    string temp = reader.ReadLine();
-                    try
+                    while (!reader.EndOfStream)
                     {
-                        string command = temp.Substring(0, 12) + "\"" + cityName + "\"" + temp.Substring(11);
-                        sim.Keyboard.TextEntry(command);
-                        sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
-                    }
-                    catch
-                    {
+                        string temp = reader.ReadLine();
+                        try
+                        {
+                            string command = temp.Substring(0, 12) + "\"" + cityName + "\"" + temp.Substring(11);
+                            sim.Keyboard.TextEntry(command);
+                            sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                        }
+                        catch
+                        {
+                        }
                     }
                 }
+                else
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        try
+                        {
+                            string temp = reader.ReadLine();
+                            string command = temp.Substring(0, 12) + TotalName + temp.Substring(11);
+                            sim.Keyboard.TextEntry(command);
+                            sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
+                        }
+                        catch
+                        {
+                        }
+                    }
+                }
+
+                reader.Close();
             }
             else
             {
-                while (!reader.EndOfStream)
-                {
-                    try
-                    {
-                        string temp = reader.ReadLine();
-                        string command = temp.Substring(0, 12) + TotalName + temp.Substring(11);
-                        sim.Keyboard.TextEntry(command);
-                        sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
-                    }
-                    catch
-                    {
-                    } 
-                }
+                MessageBox.Show("Rome total war not detected");
             }
-            
-            reader.Close();
         }
     }
 }
