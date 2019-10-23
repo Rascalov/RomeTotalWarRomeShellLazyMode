@@ -7,6 +7,7 @@ using WindowsInput.Native;
 using WindowsInput;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using System.Threading;
 
 namespace ScriptTest
 {
@@ -28,7 +29,16 @@ namespace ScriptTest
 
         static void Main(string[] args)
         {
+            InputSimulator sim = new InputSimulator();
+            
             switchToWechart();
+            Thread.Sleep(200);
+            
+            
+            
+
+
+
         }
     }
 }

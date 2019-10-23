@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
-using System.Windows.Input;
-using SlimDX.DirectInput;
 using WindowsInput.Native;
 using WindowsInput;
 using System.IO;
@@ -88,19 +80,18 @@ namespace RomeShellLaziness
                                  , "AssassinMaster 4", "SpyMaster 5", "HaleAndHearty 3"};
             for (int i = 0; i < GoodTraits.Length; i++)
             {
-                geefTrait(command, Name, SurName, GoodTraits[i]);
+                giveTrait(command, Name, SurName, GoodTraits[i]);
             }
 
             
 
         }
 
-        void geefTrait(string command, string Name, string SurName, string traitWhole)
+        void giveTrait(string command, string Name, string SurName, string traitWhole)
         {
             if (SurName == " ")
-            {
                 SurName = "";
-            }
+            
 
             string TotalName = "";
             try
@@ -123,7 +114,7 @@ namespace RomeShellLaziness
             RomeTWWindowSwitch();
 
 
-
+            sim.Keyboard.KeyPress(VirtualKeyCode.OEM_3);
             sim.Keyboard.TextEntry(command + " " + TotalName + " " + traitName + " " + traitLevel);
 
             sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
@@ -140,7 +131,7 @@ namespace RomeShellLaziness
                                  , "Perverted 6", "PublicAtheism 6", "Xenophilia 4" };
             for (int i = 0; i < BadTraits.Length; i++)
             {
-                geefTrait(command, Name, SurName, BadTraits[i]);
+                giveTrait(command, Name, SurName, BadTraits[i]);
             }
         }
 
@@ -153,7 +144,7 @@ namespace RomeShellLaziness
             string[] BadTraits = {"GoodAssassin 5", "GoodSpy 5" };
             for (int i = 0; i < BadTraits.Length; i++)
             {
-                geefTrait(command, Name, SurName, BadTraits[i]);
+                giveTrait(command, Name, SurName, BadTraits[i]);
             }
         }
 
@@ -169,14 +160,14 @@ namespace RomeShellLaziness
             }
 
         }
-        void geefUnit(string cityNaam, string unit)
+        void giveUnit(string cityNaam, string unit)
         {
             string unitF = "\"" + unit + "\"";
             string cityF = "\"" + cityNaam + "\"";
             sim.Keyboard.TextEntry("create_unit " + cityF + " " + unitF + " 1 8 8 8");
             sim.Keyboard.KeyPress(VirtualKeyCode.RETURN);
         }
-        void geefUnit(string FirstName, string LastName, string unit)
+        void giveUnit(string FirstName, string LastName, string unit)
         {
             if (LastName == " ")
             {
@@ -219,14 +210,14 @@ namespace RomeShellLaziness
             {
                 for (int i = 0; i < amount; i++)
                 {
-                    geefUnit(cityName, unit);
+                    giveUnit(cityName, unit);
                 }
             }
             else
             {
                 for (int i = 0; i < amount; i++)
                 {
-                    geefUnit(Fname, Lname, unit);
+                    giveUnit(Fname, Lname, unit);
                 }
             }
         }
@@ -263,8 +254,13 @@ namespace RomeShellLaziness
 
         private void TempSaveTemplate_Click(object sender, EventArgs e)
         {
-            string bestand = @"RomeUnitTemplates\" + TempTemplateSelect.Text + ".txt";
-            writer = new StreamWriter(bestand);
+            if (!Directory.Exists("RomeUnitTemplates"))
+            {
+                Directory.CreateDirectory("RomeUnitTemplates");
+            }
+
+            string file = @"RomeUnitTemplates\" + TempTemplateSelect.Text + ".txt";
+            writer = new StreamWriter(file);
             
             foreach ( string line in TempUnitRawInput.Text.Split('\n'))
             {
@@ -273,7 +269,7 @@ namespace RomeShellLaziness
             writer.Close();
             UpdateList();
             lblLog.ForeColor = Color.Green;
-            lblLog.Text = "Saved to " + bestand;
+            lblLog.Text = "Saved to " + file;
         }
 
         private void TempInsertUnit_Click(object sender, EventArgs e)
@@ -295,10 +291,17 @@ namespace RomeShellLaziness
         }
         void UpdateList()
         {
-            CreateLoadTemplate.Items.Clear();
-            CreateLoadTemplate.Items.AddRange(Directory.GetFiles("RomeUnitTemplates"));
-            TempTemplateSelect.Items.Clear();
-            TempTemplateSelect.Items.AddRange(Directory.GetFiles("RomeUnitTemplates"));
+            try
+            {
+                CreateLoadTemplate.Items.Clear();
+                CreateLoadTemplate.Items.AddRange(Directory.GetFiles("RomeUnitTemplates"));
+
+                TempTemplateSelect.Items.Clear();
+                TempTemplateSelect.Items.AddRange(Directory.GetFiles("RomeUnitTemplates"));
+            }
+            catch 
+            {
+            } 
         }
 
         private void TemplateClear_Click(object sender, EventArgs e)
@@ -308,8 +311,8 @@ namespace RomeShellLaziness
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string cityName, FirstName, LastName, bestand;
-            bestand = CreateLoadTemplate.Text;
+            string cityName, FirstName, LastName, file;
+            file = CreateLoadTemplate.Text;
             FirstName = cmbFirstName.Text + " ";
             LastName = cmbLname.Text;
             cityName = cmbCity.Text;
@@ -334,7 +337,7 @@ namespace RomeShellLaziness
                 TotalName = "\"" + FirstName + "\"";
             }
             RomeTWWindowSwitch();
-            reader = new StreamReader(bestand);
+            reader = new StreamReader(file);
 
             if (cityName != "")
             {

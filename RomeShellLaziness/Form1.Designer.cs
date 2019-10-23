@@ -42,6 +42,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label12 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.CreateLoadTemplate = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -60,6 +61,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label13 = new System.Windows.Forms.Label();
             this.TemplateClear = new System.Windows.Forms.Button();
             this.lblLog = new System.Windows.Forms.Label();
             this.TempSaveTemplate = new System.Windows.Forms.Button();
@@ -6705,15 +6707,15 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(159, 23);
             this.button3.TabIndex = 7;
-            this.button3.Text = "SUPER AGENT";
+            this.button3.Text = "SUPER AGENT/DIPLOMAT";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(525, 6);
+            this.button4.Location = new System.Drawing.Point(485, 6);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(35, 23);
+            this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 13;
             this.button4.Text = "$$$";
             this.button4.UseVisualStyleBackColor = true;
@@ -6755,6 +6757,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.button5);
             this.tabPage2.Controls.Add(this.CreateLoadTemplate);
             this.tabPage2.Controls.Add(this.label5);
@@ -6771,16 +6774,25 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(572, 365);
+            this.tabPage2.Size = new System.Drawing.Size(572, 374);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Create Unit";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(4, 110);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(54, 13);
+            this.label12.TabIndex = 30;
+            this.label12.Text = "Template:";
+            // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(409, 69);
+            this.button5.Location = new System.Drawing.Point(431, 124);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(160, 23);
+            this.button5.Size = new System.Drawing.Size(135, 23);
             this.button5.TabIndex = 29;
             this.button5.Text = "Use Selected Template";
             this.button5.UseVisualStyleBackColor = true;
@@ -6789,9 +6801,9 @@
             // CreateLoadTemplate
             // 
             this.CreateLoadTemplate.FormattingEnabled = true;
-            this.CreateLoadTemplate.Location = new System.Drawing.Point(281, 71);
+            this.CreateLoadTemplate.Location = new System.Drawing.Point(6, 126);
             this.CreateLoadTemplate.Name = "CreateLoadTemplate";
-            this.CreateLoadTemplate.Size = new System.Drawing.Size(121, 21);
+            this.CreateLoadTemplate.Size = new System.Drawing.Size(419, 21);
             this.CreateLoadTemplate.TabIndex = 28;
             // 
             // label5
@@ -13746,7 +13758,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(572, 365);
+            this.tabPage3.Size = new System.Drawing.Size(572, 374);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Population";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -13756,9 +13768,9 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(66, 61);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(239, 13);
+            this.label9.Size = new System.Drawing.Size(143, 13);
             this.label9.TabIndex = 2;
-            this.label9.Text = "Deze tab doet nog niks, maar misschien later nog";
+            this.label9.Text = "nothing here yet, maybe later";
             // 
             // textBox1
             // 
@@ -13777,6 +13789,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.label13);
             this.tabPage4.Controls.Add(this.TemplateClear);
             this.tabPage4.Controls.Add(this.lblLog);
             this.tabPage4.Controls.Add(this.TempSaveTemplate);
@@ -13797,6 +13810,15 @@
             this.tabPage4.Text = "Templates";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 94);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(326, 13);
+            this.label13.TabIndex = 33;
+            this.label13.Text = "Raw input (this is what the textfile gets when you save the template)";
+            // 
             // TemplateClear
             // 
             this.TemplateClear.Location = new System.Drawing.Point(439, 256);
@@ -13811,7 +13833,7 @@
             // 
             this.lblLog.AutoSize = true;
             this.lblLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLog.Location = new System.Drawing.Point(6, 87);
+            this.lblLog.Location = new System.Drawing.Point(6, 66);
             this.lblLog.Name = "lblLog";
             this.lblLog.Size = new System.Drawing.Size(0, 16);
             this.lblLog.TabIndex = 31;
@@ -14244,6 +14266,8 @@
         private System.Windows.Forms.ComboBox CreateLoadTemplate;
         private System.Windows.Forms.Button TemplateClear;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
     }
 }
 
